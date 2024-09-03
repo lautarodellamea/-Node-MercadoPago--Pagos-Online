@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagos</title>
+</head>
+
+<body>
+
+  <button id="checkout">Realizar Pago</button>
+
+  <script>
+
+    const checkout = document.getElementById('checkout')
+
+    checkout.addEventListener('click', async () => {
+
+      // no tendremos errores de cors ya que el mismo servidor tiene la rest api y tambien sirve este html 
+      const res = await fetch("/create-order", {
+        method: "POST",
+      })
+
+      const data = await res.json()
+      console.log(data)
+
+      // redireccionamos
+      window.location.href = data.init_point
+    })
+
+  </script>
+
+</body>
+
+</html>
